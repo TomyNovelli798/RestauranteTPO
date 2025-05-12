@@ -15,5 +15,13 @@ public class Cliente {
         this.direccion = direccion;
         this.correo = correo;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
 }
 

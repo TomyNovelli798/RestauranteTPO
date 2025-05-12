@@ -1,6 +1,6 @@
 package org.example.Model;
 
-abstract class Plato extends Componente {
+public abstract class Plato extends Componente {
 
     private String descripcion;
     private float precio;

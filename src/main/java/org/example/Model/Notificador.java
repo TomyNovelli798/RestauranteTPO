@@ -1,6 +1,7 @@
 package org.example.Model;
 
 public class Notificador {
+
     private EstrategiaNotificacion estrategia;
     private Notificacion notificacion;
 
@@ -10,6 +11,6 @@ public class Notificador {
     }
 
     public boolean enviarNotificacion(Notificacion notificacion) {
-        return true;
+        return this.estrategia.enviarNotificacion(notificacion);
     }
 }

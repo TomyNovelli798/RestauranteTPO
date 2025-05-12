@@ -6,6 +6,7 @@ public class Pedido {
 
     private String idPedido;
     private List<Plato> platos;
+    private Empleado empleado;
     private Cliente cliente;
     private Estado estado;
 

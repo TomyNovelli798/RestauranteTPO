@@ -11,5 +11,5 @@ public abstract class Empleado {
 
     abstract void Estado();
 
-    abstract boolean recibirNotificacion();
+    abstract boolean recibirNotificacion(Notificacion notificacion);
 }
