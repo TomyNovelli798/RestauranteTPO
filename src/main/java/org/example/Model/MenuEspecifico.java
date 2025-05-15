@@ -1,16 +1,14 @@
 package org.example.Model;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MenuEspecifico extends Componente {
 
-    private String nombre;
     private List<Componente> elementos;
 
     public MenuEspecifico(String nombre) {
-        this.nombre = nombre;
+        super(nombre);
         this.elementos = new ArrayList<>();
     }
 
@@ -31,11 +29,36 @@ public class MenuEspecifico extends Componente {
 
     @Override
     public Componente getHijo() {
-        return null;
+        return
+
+    }
+
+    @Override
+    public List<Componente> getHijos() {
+        return elementos;
     }
 
     @Override
     public Componente eliminar() {
         return null;
+    }
+
+    @Override
+    public float getPrecio(String producto) {
+        if(this.elementos.isEmpty()) {
+            return -1; // indicando que este menu no tiene items
+        }
+        return buscadorPrecio(producto, this.getHijos());
+    }
+
+    private float buscadorPrecio(String producto, List<Componente> items) {
+        for(Componente elemento : items) {
+            if(elemento instanceof Producto && elemento.getNombre().equals(producto)) {
+                 return ((Producto) elemento).getPrecio();
+            } else if(elemento instanceof MenuEspecifico) {
+                buscadorPrecio(producto, elemento.getHijos());
+            }
+        }
+        return -1; // indica no haberlo encontrado
     }
 }

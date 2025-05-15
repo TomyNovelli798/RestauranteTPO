@@ -1,9 +1,13 @@
 package org.example.Model;
 
+import java.util.List;
+
 public abstract class Componente  {
 
-    public Componente() {
-        // Constructor por defecto
+    private String nombre;
+
+    public Componente(String nombre) {
+        this.nombre = nombre;
     }
 
     public abstract boolean iniciarOrdenCompra();
@@ -14,6 +18,13 @@ public abstract class Componente  {
 
     public abstract Componente getHijo();
 
+    public abstract List<Componente> getHijos();
+
     public abstract Componente eliminar();
 
+    public abstract float getPrecio(String producto);
+
+    public String getNombre() {
+        return nombre;
+    }
 }

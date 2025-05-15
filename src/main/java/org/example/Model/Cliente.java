@@ -4,14 +4,14 @@ public class Cliente {
 
     private String nombre;
     private String apellido;
-    private String dni;
+    private String contrasenia;
     private String direccion;
     private String correo;
 
-    public Cliente(String nombre, String apellido, String dni, String direccion, String correo) {
+    public Cliente(String nombre, String apellido, String contrasenia, String direccion, String correo) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.dni = dni;
+        this.contrasenia = contrasenia;
         this.direccion = direccion;
         this.correo = correo;
     }
@@ -22,6 +22,10 @@ public class Cliente {
 
     public String getApellido() {
         return apellido;
+    }
+
+    public int getHashContrasenia() {
+        return this.hashCode();
     }
 }
 

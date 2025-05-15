@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mozo extends Empleado{
-    private boolean estaPedidoListo;
     private List<Notificacion> notificaciones;
+
     public Mozo(String id, String nombre) {
-        super(id, nombre);
-        estaPedidoListo = false;
-        notificaciones = new ArrayList<Notificacion>();
+        super(id, nombre, new ArrayList<>());
+        notificaciones = new ArrayList<>();
     }
 
     @Override
-    void Estado() {
+    void continuarEtapa() { // Continuar con esta logica
+
+    }
+
+    @Override
+    void Estado() { // Verificar si este metodo sirve
 
     }
 
@@ -24,5 +28,11 @@ public class Mozo extends Empleado{
         return true;
     }
 
-    public boolean retirarPedido() {}
+    public void cocinar() { // continuar esta logica
+
+    }
+
+
+
+
 }

@@ -1,14 +1,12 @@
-package org.example.Controller;
-
-import org.example.Model.*;
+package org.example.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ControllerNotificacion {
+public class ServiceNotificacion {
     private List<Notificacion> notificaciones; //guarda las notificaciones
 
-    public ControllerNotificacion( ) {
+    public ServiceNotificacion( ) {
         this.notificaciones = new ArrayList<>();
     }
 

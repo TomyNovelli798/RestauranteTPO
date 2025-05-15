@@ -7,7 +7,7 @@ public class Chef extends Empleado{
     private boolean estaPedidoListo;
     private List<Notificacion> notificaciones;
     public Chef(String id, String nombre) {
-        super(id, nombre);
+        super(id, nombre, new ArrayList<>());
         estaPedidoListo = false;
         notificaciones = new ArrayList<Notificacion>();
 
