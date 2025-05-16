@@ -29,8 +29,7 @@ public class MenuEspecifico extends Componente {
 
     @Override
     public Componente getHijo() {
-        return
-
+        return null;
     }
 
     @Override

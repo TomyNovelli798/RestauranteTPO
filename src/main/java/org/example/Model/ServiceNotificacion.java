@@ -10,13 +10,19 @@ public class ServiceNotificacion {
         this.notificaciones = new ArrayList<>();
     }
 
-    public boolean enviarNotificacion(Pedido pedido, Empleado mozo, Cliente cliente, EstrategiaNotificacion estrategia, Estado estado) {
+    public boolean enviarNotificacion(Pedido pedido, Usuario usuario) {
 
-        Notificacion notificacion = new Notificacion(pedido, estado, mozo, cliente);
+        Notificacion notificacion = new Notificacion(pedido.getProductos(), pedido.getEstado());
         this.notificaciones.add(notificacion);
 
-        Notificador notificador = new Notificador(estrategia, notificacion);
-        return notificador.enviarNotificacion(notificacion);
+        Notificador notificador;
+
+        if(usuario instanceof Cliente) {
+            notificador = new Notificador(new NotificacionesPorCorreoElectronico(), notificacion);
+        } else {
+            notificador = new Notificador(new NotificacionPorSistema(), notificacion);
+        }
+        return notificador.enviarNotificacion(notificacion, usuario);
 
     }
 }
