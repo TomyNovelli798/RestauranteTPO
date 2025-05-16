@@ -1,25 +1,35 @@
 package org.example.Model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public abstract class Empleado {
-    private String id;
+public abstract class Empleado extends Usuario {
+
     private String nombre;
-    private List<String> nrosOrdenes
+    private List<Notificacion> casillaSistema;
 
-    public Empleado(String id, String nombre, List<String> nrosOrdenes) {
-        this.id = id;
+    public Empleado(String tipoUsuario, String nombre, String apellido, Integer hashContrasenia ) {
+        super(tipoUsuario, nombre, apellido, hashContrasenia);
         this.nombre = nombre;
-        this.nrosOrdenes = nrosOrdenes;
+        this.casillaSistema = new ArrayList<>();
     }
 
-    public void agregarOrden(String nroOrden) {
-        this.nrosOrdenes.add(nroOrden);
+    public void recibir(Notificacion notificacion) {
+        this.casillaSistema.add(notificacion);
     }
 
-    abstract void continuarEtapa();
+    public abstract void continuarEtapa(Empleado empleado, Pedido pedido);
 
-    abstract void Estado();
 
-    abstract boolean recibirNotificacion(Notificacion notificacion);
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    public List<Notificacion> getCasillaSistema() {
+        return casillaSistema;
+    }
 }

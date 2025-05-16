@@ -8,17 +8,32 @@ public class Restaurante {
     private Componente menu;
     private List<Empleado> empleados;
     private ServiceNotificacion serviceNotificacion;
-    private ServiceCliente serviceCliente;
+    private ServiceUsuario serviceUsuario;
     private ServicePedido servicePedido;
 
     public Restaurante(Componente menu) {
         this.menu = menu;
         this.empleados = new ArrayList<>();
         this.serviceNotificacion = new ServiceNotificacion();
-        this.serviceCliente = new ServiceCliente();
+        this.serviceUsuario = new ServiceUsuario();
         this.servicePedido = new ServicePedido();
     }
 
+    public void registrarUsuario(String tipoUsuario,
+                                 String nombre,
+                                 String apellido,
+                                 Integer hashContrasenia,
+                                 String correo ) {
+        this.serviceUsuario.registrarUsuario(tipoUsuario, nombre, apellido, hashContrasenia, correo);
+    }
+
+    public boolean iniciarSesion(String nombre, String contrasenia) {
+        return this.serviceUsuario.iniciarSesion(nombre, contrasenia);
+    }
+
+    public boolean cerrarSesion() {
+        return this.serviceUsuario.cerrarSesion();
+    }
 
     public float calcularPedido(Map<String, Integer> productos) {
         float total = 0;
@@ -29,36 +44,49 @@ public class Restaurante {
         return total;
     }
 
-    public void hacerPedido(String monto, String cupon, Map<String, Integer> productos) {
-        if(Optional.of(this.serviceCliente.getClienteActual()).isEmpty()) {
+    public void hacerPedido(String cupon, Map<String, Integer> productos) {
+        float precioTotal = this.calcularPedido(productos);
+        if(Optional.of(this.serviceUsuario.getUsuarioActual()).isEmpty()) {
             System.out.println("Primero inicia sesion.");
             return;
         }
+        float descuento = this.servicePedido.isCupon(cupon);
+        if(descuento > 0) {
+            precioTotal -= descuento;
+        }
 
-        this.servicePedido.nuevoPedido(productos, this.serviceCliente.getClienteActual(), Estado.EN_ESPERA);
-        System.out.println("Pedido confirmado, actualmente se encuentraen estado de espera.");
+
+
+
+        this.servicePedido.nuevoPedido(productos, (Cliente)this.serviceUsuario.getUsuarioActual(), precioTotal);
+
+
+        System.out.println("Pedido"+this.servicePedido.getUltimoNroPedido()+", actualmente se encuentraen estado de espera.");
         for(Empleado empleado : this.empleados) {
             if(empleado instanceof Mozo) {
-                empleado.agregarOrden(this.servicePedido.getUltimoPedido());
+                this.serviceNotificacion.enviarNotificacion(this.servicePedido.getUltimoPedido(), empleado);
             }
         }
     }
 
-    public boolean notificacionPedido() {
-        this.serviceNotificacion.enviarNotificacion()
+    public void pagoPedido(float monto, String tipoTarjeta) {
+        this.serviceUsuario.pagoCliente(monto, tipoTarjeta);
     }
 
-    public boolean gestionarPedido(Pedido p) {
-        return true;
+    public void cambiarEstado(Empleado empleado, Pedido pedido) {
+        if (pedido.getEstado().equals(Estado.ENTREGADO)) {
+            System.out.println("Estado entregado");
+            return;
+        }
+        empleado.continuarEtapa(empleado, pedido);
     }
 
-    public boolean actualizarMenu() {
-        return true;
+    public String generarInforme(Empleado admin) {
+        return this.serviceUsuario.generarInformeAdmin();
     }
 
-    public void cambiarEstado(Empleado e){
-
+    public boolean notificacionPedido(Pedido pedido, Usuario usuario) {
+        return this.serviceNotificacion.enviarNotificacion(pedido, usuario);
     }
-
 
 }

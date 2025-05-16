@@ -4,25 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chef extends Empleado{
-    private boolean estaPedidoListo;
-    private List<Notificacion> notificaciones;
-    public Chef(String id, String nombre) {
-        super(id, nombre, new ArrayList<>());
-        estaPedidoListo = false;
-        notificaciones = new ArrayList<Notificacion>();
+    public Chef(String id, String nombre, String apellido, Integer hashContrasenia) {
+        super(id, nombre, apellido, hashContrasenia);
 
     }
 
     @Override
-    void Estado() {
-
-    }
-
-    @Override
-    boolean recibirNotificacion(Notificacion notificacion) {
-        this.notificaciones.add(notificacion);
-        System.out.println("Notificacion recibida: " + notificacion.toString());
-        return true;
+    public void continuarEtapa(Empleado empleado, Pedido pedido) {
+        System.out.println("El chef: El pedido esta preparandose.");
+        pedido.cambiarEstado(Estado.EN_PREPARACION);
     }
 
     public boolean cocinarComida(){

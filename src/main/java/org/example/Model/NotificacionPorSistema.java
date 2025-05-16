@@ -3,10 +3,16 @@ package org.example.Model;
 public class NotificacionPorSistema implements EstrategiaNotificacion {
 
     @Override
-    public boolean enviarNotificacion(Notificacion notificacion) {
-        String empleado = notificacion.remitente1().getClass().toString();
-        String estado = notificacion.estadoPedido().name();
-        System.out.println("El "+empleado+" define el estado "+estado);
+    public boolean enviarNotificacion(Notificacion notificacion, Usuario usuario) {
+        Empleado puesto = (Empleado) usuario;
+        String contexto = "";
+        puesto.recibir(notificacion);
+
+        System.out.println("El " +
+                usuario.getClass().getName() +
+                " define el estado: "+
+                notificacion.estado().name().toLowerCase());
+
         return true;
     }
 }

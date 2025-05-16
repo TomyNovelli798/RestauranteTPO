@@ -1,29 +1,43 @@
 package org.example.Model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Administrativo extends Empleado{
-    private boolean estaPedidoListo;
-    private List<Notificacion> notificaciones;
-    public Administrativo(String id, String nombre) {
-        super(id, nombre, new ArrayList<>());
-        estaPedidoListo = false;
-        notificaciones = new ArrayList<Notificacion>();
+    public Administrativo(String tipoUsuario, String nombre, String apellido, Integer hashContrasenia) {
+        super(tipoUsuario, nombre, apellido, hashContrasenia);
     }
 
     @Override
-    void Estado() {
+    public void continuarEtapa(Empleado empleado, Pedido pedido) {
+        System.out.println("Administrador: Este pedido esta entregado.");
+        pedido.cambiarEstado(Estado.ENTREGADO);
     }
 
-    @Override
-    boolean recibirNotificacion(Notificacion notificacion) {
-        this.notificaciones.add(notificacion);
-        System.out.println("Notificacion recibida: " + notificacion.toString());
-        return true;
-    }
 
     public String generarInforme() {
-        return "";
+        List<Notificacion> notificaciones = getCasillaSistema();
+        Map<String, Integer> parametros = contabilizar(notificaciones);
+        Set<String> keys = parametros.keySet();
+        StringBuilder informeArray = new StringBuilder();
+        informeArray.append("El informe de ventas son: \n");
+        while(!keys.isEmpty()) {
+            String p = keys.iterator().next();
+            informeArray.append("Producto: ").append(p).append("  Cantidad: ").append(parametros.get(p)).append("\n");
+            keys.remove(p);
+        }
+        return informeArray.toString();
     }
+
+    private Map<String, Integer> contabilizar(List<Notificacion> n) {
+        Map<String, Integer> cantidad = new HashMap<>();
+        for(Notificacion notificacion : n) {
+            for (String producto : notificacion.productos()) {
+                cantidad.put(producto, cantidad.getOrDefault(producto, 0) + 1);
+            }
+        }
+        return cantidad;
+    }
+
+
+
 }

@@ -10,7 +10,7 @@ public class Notificador {
         this.notificacion = notificacion;
     }
 
-    public boolean enviarNotificacion(Notificacion notificacion) {
-        return this.estrategia.enviarNotificacion(notificacion);
+    public boolean enviarNotificacion(Notificacion notificacion, Usuario usuario) {
+        return this.estrategia.enviarNotificacion(notificacion, usuario);
     }
 }
