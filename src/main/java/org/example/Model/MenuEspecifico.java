@@ -13,18 +13,8 @@ public class MenuEspecifico extends Componente {
     }
 
     @Override
-    public boolean iniciarOrdenCompra() {
-        return false;
-    }
-
-    @Override
-    public boolean seleccionarProducto(String plato) {
-        return false;
-    }
-
-    @Override
-    public Componente añadir() {
-        return null;
+    public void añadir(Componente comp) {
+        this.elementos.add(comp);
     }
 
     @Override
@@ -38,8 +28,8 @@ public class MenuEspecifico extends Componente {
     }
 
     @Override
-    public Componente eliminar() {
-        return null;
+    public void eliminar(Componente componente) {
+        this.elementos.remove(componente);
     }
 
     @Override

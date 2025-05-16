@@ -22,14 +22,7 @@ public class Pedido {
         this.precioTotal = precioTotal;
     }
 
-    public void cambiarEstado(Estado estado) {
-    }
-
-    public void notificarCliente() {
-    }
-
-    public void enviarFactura() {
-    }
+    public void cambiarEstado(Estado estado) {this.estado = estado;}
 
     public String getIdPedido() {
         return idPedido;

@@ -10,17 +10,13 @@ public abstract class Componente  {
         this.nombre = nombre;
     }
 
-    public abstract boolean iniciarOrdenCompra();
-
-    public abstract boolean seleccionarProducto(String plato);
-
-    public abstract Componente añadir();
+    public abstract void añadir(Componente comp);
 
     public abstract Componente getHijo();
 
     public abstract List<Componente> getHijos();
 
-    public abstract Componente eliminar();
+    public abstract void eliminar(Componente comp);
 
     public abstract float getPrecio(String producto);
 

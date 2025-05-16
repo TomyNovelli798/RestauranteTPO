@@ -2,7 +2,7 @@ package org.example.Model;
 
 import java.util.List;
 
-public abstract class Producto extends Componente {
+public class Producto extends Componente {
 
     private String descripcion;
     private float precio;
@@ -15,20 +15,9 @@ public abstract class Producto extends Componente {
         this.ingredienteAlergenico = ingredienteAlergenico;
     }
 
-    @Override
-    public boolean iniciarOrdenCompra() {
-        return false;
-    }
 
     @Override
-    public boolean seleccionarProducto(String plato) {
-        return false;
-    }
-
-    @Override
-    public Componente añadir() {
-        return null;
-    }
+    public void añadir(Componente comp) {}
 
     @Override
     public Componente getHijo() {
@@ -41,8 +30,11 @@ public abstract class Producto extends Componente {
     }
 
     @Override
-    public Componente eliminar() {
-        return null;
+    public void eliminar(Componente componente) {}
+
+    @Override
+    public float getPrecio(String producto) {
+        return 0;
     }
 
     public float getPrecio() {

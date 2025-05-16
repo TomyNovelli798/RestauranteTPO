@@ -38,9 +38,6 @@ public class Cliente extends Usuario {
         return false;
     }
 
-
-
-
     public String getCorreo() {
         return correo;
     }

@@ -6,7 +6,6 @@ import java.util.List;
 public class Chef extends Empleado{
     public Chef(String id, String nombre, String apellido, Integer hashContrasenia) {
         super(id, nombre, apellido, hashContrasenia);
-
     }
 
     @Override
@@ -15,7 +14,4 @@ public class Chef extends Empleado{
         pedido.cambiarEstado(Estado.EN_PREPARACION);
     }
 
-    public boolean cocinarComida(){
-        return true;
-    }
 }

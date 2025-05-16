@@ -13,7 +13,6 @@ public class Administrativo extends Empleado{
         pedido.cambiarEstado(Estado.ENTREGADO);
     }
 
-
     public String generarInforme() {
         List<Notificacion> notificaciones = getCasillaSistema();
         Map<String, Integer> parametros = contabilizar(notificaciones);

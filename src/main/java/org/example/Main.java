@@ -1,9 +1,57 @@
 package org.example;
 
+import org.example.Controller.Restaurante;
+import org.example.Model.Componente;
+import org.example.Model.MenuEspecifico;
+import org.example.Model.Producto;
+
+import java.awt.*;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
+
+        Componente menuGeneral = new MenuEspecifico("Menu General");
+
+        MenuEspecifico menuEntradas = new MenuEspecifico("Entradas");
+        MenuEspecifico menuBebidas = new MenuEspecifico("Bebidas");
+        MenuEspecifico menuPlatos = new MenuEspecifico("Platos");
+        MenuEspecifico menuPostres = new MenuEspecifico("Postres");
+
+        // Entradas
+        Producto empanada = new Producto("Empanada", "Empanada de carne picada", 500F, false);
+        Producto bruschetta = new Producto("Bruschetta", "Pan tostado con tomate y albahaca", 450F, false);
+        menuEntradas.añadir(empanada);
+        menuEntradas.añadir(bruschetta);
+
+        // Bebidas
+        Producto cocaCola = new Producto("Coca-Cola", "Bebida gaseosa 350ml", 300F, false);
+        Producto limonada = new Producto("Limonada", "Limonada casera con menta", 350F, false);
+        menuBebidas.añadir(cocaCola);
+        menuBebidas.añadir(limonada);
+
+        // Platos
+        Producto milanesa = new Producto("Milanesa", "Milanesa con papas fritas", 1200F, true);
+        Producto pasta = new Producto("Pasta", "Fideos con salsa bolognesa", 1100F, false);
+        menuPlatos.añadir(milanesa);
+        menuPlatos.añadir(pasta);
+
+        // Postres
+        Producto helado = new Producto("Helado", "Helado de vainilla con salsa de chocolate", 400F, true);
+        Producto flan = new Producto("Flan", "Flan casero con dulce de leche", 380F, true);
+        menuPostres.añadir(helado);
+        menuPostres.añadir(flan);
+
+        // Agregar los submenús al menú general
+        menuGeneral.añadir(menuEntradas);
+        menuGeneral.añadir(menuBebidas);
+
+        menuGeneral.añadir(menuPlatos);
+        menuGeneral.añadir(menuPostres);
+
+
+        Restaurante restaurante = new Restaurante(menuGeneral);
 
     }
 }
