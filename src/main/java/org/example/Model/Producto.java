@@ -2,7 +2,9 @@ package org.example.Model;
 
 import java.util.List;
 
-public class Producto extends Componente {
+public class
+Producto extends Componente {
+
 
     private String descripcion;
     private float precio;
@@ -36,6 +38,7 @@ public class Producto extends Componente {
     public float getPrecio(String producto) {
         return 0;
     }
+
 
     public float getPrecio() {
         return precio;

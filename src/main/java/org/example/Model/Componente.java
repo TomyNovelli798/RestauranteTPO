@@ -16,6 +16,7 @@ public abstract class Componente  {
 
     public abstract List<Componente> getHijos();
 
+
     public abstract void eliminar(Componente comp);
 
     public abstract float getPrecio(String producto);

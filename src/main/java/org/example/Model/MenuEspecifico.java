@@ -12,6 +12,7 @@ public class MenuEspecifico extends Componente {
         this.elementos = new ArrayList<>();
     }
 
+
     @Override
     public void añadir(Componente comp) {
         this.elementos.add(comp);
