@@ -13,11 +13,11 @@ public class Cliente extends Usuario {
     private Optional<TarjetaCredito> tarjetaCredito;
     private Optional<TarjetaDebito> tarjetaDebito;
 
-    public Cliente(String tipoUsuario, String nombre, String apellido, Integer hashContrasenia, String correo) {
+    public Cliente(String tipoUsuario, String nombre, String apellido, String hashContrasenia, String correo) {
         super(tipoUsuario, nombre, apellido, hashContrasenia);
         this.notificaciones = new ArrayList<>();
-        this.tarjetaCredito = Optional.empty();
-        this.tarjetaDebito = Optional.empty();
+        this.tarjetaCredito = Optional.of(new TarjetaCredito("111111"));
+        this.tarjetaDebito = Optional.of(new TarjetaDebito("222222"));
         this.correo = correo;
     }
 
@@ -30,7 +30,7 @@ public class Cliente extends Usuario {
     }
 
     public boolean pagar(float monto, String tipoTarjeta) {
-        if(tipoTarjeta.equals("Credito") && tarjetaCredito.isPresent()) {
+        if(tipoTarjeta.equalsIgnoreCase("Credito") && tarjetaCredito.isPresent()) {
             return tarjetaCredito.get().pagar(monto);
         } else if(tipoTarjeta.equalsIgnoreCase("Debito") && tarjetaDebito.isPresent()) {
             return tarjetaDebito.get().pagar(monto);

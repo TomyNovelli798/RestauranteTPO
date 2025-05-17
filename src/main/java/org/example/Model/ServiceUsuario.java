@@ -22,15 +22,15 @@ public class ServiceUsuario {
         return usuarioActual.get();
     }
 
-    public void registrarUsuario(String tipoUsuario, String nombre, String apellido, Integer hashContrasenia, String correo) {
+    public void registrarUsuario(String tipoUsuario, String nombre, String apellido, String contrasenia, String correo) {
 
         for(Usuario empleado : usuarios) {
-            if ( empleado.getNombre().equalsIgnoreCase(nombre) && empleado.getHashContrasenia() == hashContrasenia.hashCode()) {
+            if ( empleado.getNombre().equalsIgnoreCase(nombre) && empleado.getContrasenia().equalsIgnoreCase(contrasenia)) {
                 System.out.println("Usuario ya registrado");
                 return;
             }
         }
-        this.usuarios.add(new Cliente(tipoUsuario, nombre, apellido, hashContrasenia, correo));
+        this.usuarios.add(new Cliente(tipoUsuario, nombre, apellido, contrasenia, correo));
 
     }
 
@@ -40,7 +40,7 @@ public class ServiceUsuario {
             return false;
         }
         for (Usuario cliente : usuarios) {
-            if (cliente.getNombre().equalsIgnoreCase(nombre) && cliente.getHashContrasenia() == contrasenia.hashCode()) {
+            if (cliente.getNombre().equalsIgnoreCase(nombre) && cliente.getContrasenia().equalsIgnoreCase(contrasenia)) {
                 this.usuarioActual = Optional.of(cliente);
                 System.out.println("Se inicia la sesion.");
                 return true;
@@ -67,11 +67,5 @@ public class ServiceUsuario {
     public String generarInformeAdmin() {
         return ((Administrativo) this.usuarioActual.get()).generarInforme();
     }
-
-
-
-
-
-
 
 }

@@ -5,24 +5,24 @@ public class Usuario {
     private String tipoUsuario;
     private String nombre;
     private String apellido;
-    private Integer hashContrasenia;
+    private String contrasenia;
 
     public Usuario(String tipoUsuario,
                    String nombre,
                    String apellido,
-                   Integer hashContrasenia) {
+                   String contrasenia) {
         this.tipoUsuario = tipoUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.hashContrasenia = hashContrasenia;
+        this.contrasenia = contrasenia;
     }
 
     public String getTipoUsuario() {
         return tipoUsuario;
     }
 
-    public Integer getHashContrasenia() {
-        return hashContrasenia;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
     public String getApellido() {

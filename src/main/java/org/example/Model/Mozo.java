@@ -8,8 +8,8 @@ public class Mozo extends Empleado{
     List<Notificacion> notificaciones;
 
 
-    public Mozo(String id, String nombre, String apellido, Integer hashContrasenia) {
-        super(id, nombre, apellido, hashContrasenia);
+    public Mozo(String id, String nombre, String apellido, String contrasenia) {
+        super(id, nombre, apellido, contrasenia);
         notificaciones = new ArrayList<>();
     }
 
@@ -19,8 +19,5 @@ public class Mozo extends Empleado{
         pedido.cambiarEstado(Estado.LISTO_PARA_ENTREGAR);
 
     }
-
-
-
 
 }

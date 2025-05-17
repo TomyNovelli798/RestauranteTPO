@@ -3,8 +3,8 @@ package org.example.Model;
 import java.util.*;
 
 public class Administrativo extends Empleado{
-    public Administrativo(String tipoUsuario, String nombre, String apellido, Integer hashContrasenia) {
-        super(tipoUsuario, nombre, apellido, hashContrasenia);
+    public Administrativo(String tipoUsuario, String nombre, String apellido, String contrasenia) {
+        super(tipoUsuario, nombre, apellido, contrasenia);
     }
 
     @Override

@@ -36,5 +36,7 @@ public class Pedido {
         return new ArrayList<>(productos.keySet());
     }
 
+    public Cliente getCliente() {return cliente;}
+
 }
 

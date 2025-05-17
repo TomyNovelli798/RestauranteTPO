@@ -1,11 +1,12 @@
 package org.example;
 
 import org.example.Controller.Restaurante;
-import org.example.Model.Componente;
-import org.example.Model.MenuEspecifico;
-import org.example.Model.Producto;
+import org.example.Model.*;
+import org.example.Vista.VistaRestaurante;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -46,12 +47,14 @@ public class Main {
         // Agregar los submenús al menú general
         menuGeneral.añadir(menuEntradas);
         menuGeneral.añadir(menuBebidas);
-
         menuGeneral.añadir(menuPlatos);
         menuGeneral.añadir(menuPostres);
 
-
         Restaurante restaurante = new Restaurante(menuGeneral);
 
+
+        // Iniciar vista
+        VistaRestaurante vista = new VistaRestaurante(restaurante);
+        vista.iniciar();
     }
 }

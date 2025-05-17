@@ -22,9 +22,9 @@ public class Restaurante {
     public void registrarUsuario(String tipoUsuario,
                                  String nombre,
                                  String apellido,
-                                 Integer hashContrasenia,
+                                 String contrasenia,
                                  String correo ) {
-        this.serviceUsuario.registrarUsuario(tipoUsuario, nombre, apellido, hashContrasenia, correo);
+        this.serviceUsuario.registrarUsuario(tipoUsuario, nombre, apellido, contrasenia, correo);
     }
 
     public boolean iniciarSesion(String nombre, String contrasenia) {
@@ -69,8 +69,8 @@ public class Restaurante {
         }
     }
 
-    public void pagoPedido(float monto, String tipoTarjeta) {
-        this.serviceUsuario.pagoCliente(monto, tipoTarjeta);
+    public boolean pagoPedido(float monto, String tipoTarjeta) {
+        return this.serviceUsuario.pagoCliente(monto, tipoTarjeta);
     }
 
     public void cambiarEstado(Empleado empleado, Pedido pedido) {
@@ -89,4 +89,23 @@ public class Restaurante {
         return this.serviceNotificacion.enviarNotificacion(pedido, usuario);
     }
 
+    public Componente getMenu() {
+        return menu;
+    }
+
+    public List<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public ServiceNotificacion getServiceNotificacion() {
+        return serviceNotificacion;
+    }
+
+    public ServiceUsuario getServiceUsuario() {
+        return serviceUsuario;
+    }
+
+    public ServicePedido getServicePedido() {
+        return servicePedido;
+    }
 }

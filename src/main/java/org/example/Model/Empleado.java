@@ -10,8 +10,8 @@ public abstract class Empleado extends Usuario {
     private String nombre;
     private List<Notificacion> casillaSistema;
 
-    public Empleado(String tipoUsuario, String nombre, String apellido, Integer hashContrasenia ) {
-        super(tipoUsuario, nombre, apellido, hashContrasenia);
+    public Empleado(String tipoUsuario, String nombre, String apellido, String contrasenia ) {
+        super(tipoUsuario, nombre, apellido, contrasenia);
         this.nombre = nombre;
         this.casillaSistema = new ArrayList<>();
     }

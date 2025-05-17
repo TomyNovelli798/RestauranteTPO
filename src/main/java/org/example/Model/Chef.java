@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chef extends Empleado{
-    public Chef(String id, String nombre, String apellido, Integer hashContrasenia) {
-        super(id, nombre, apellido, hashContrasenia);
+    public Chef(String id, String nombre, String apellido, String contrasenia) {
+        super(id, nombre, apellido, contrasenia);
     }
 
     @Override
