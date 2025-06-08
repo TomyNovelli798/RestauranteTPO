@@ -10,7 +10,7 @@ public class Administrativo extends Empleado{
     @Override
     public void continuarEtapa(Empleado empleado, Pedido pedido) {
         System.out.println("Administrador: Este pedido esta entregado.");
-        pedido.cambiarEstado(Estado.ENTREGADO);
+        pedido.setEstado(Estado.ENTREGADO);
     }
 
     public String generarInforme() {

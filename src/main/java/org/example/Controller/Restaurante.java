@@ -2,6 +2,8 @@ package org.example.Controller;
 
 import org.example.Model.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Restaurante {
@@ -10,6 +12,7 @@ public class Restaurante {
     private ServiceNotificacion serviceNotificacion;
     private ServiceUsuario serviceUsuario;
     private ServicePedido servicePedido;
+    private Plataforma plataforma;
 
     public Restaurante(Componente menu) {
         this.menu = menu;
@@ -44,41 +47,66 @@ public class Restaurante {
         return total;
     }
 
-    public void hacerPedido(String cupon, Map<String, Integer> productos) {
+    public void hacerPedido(
+            String cupon,
+            Map<String, Integer> productos,
+            String horario,
+            Plataforma plataforma
+    ) {
         float precioTotal = this.calcularPedido(productos);
         if(Optional.of(this.serviceUsuario.getUsuarioActual()).isEmpty()) {
             System.out.println("Primero inicia sesion.");
             return;
         }
-        float descuento = this.servicePedido.isCupon(cupon);
-        if(descuento > 0) {
-            precioTotal -= descuento;
+
+        if (plataforma.equals(Plataforma.APP)) {
+            float descuento = this.servicePedido.isCupon(cupon);
+            if(descuento > 0) {
+                precioTotal -= descuento;
+            }
         }
 
+        if(Objects.equals(horario, "")) {
+            horario = getTiempoActual();
+        }
 
+        this.servicePedido.nuevoPedido(
+                productos,
+                (Cliente)this.serviceUsuario.getUsuarioActual(),
+                precioTotal, horario,
+                calcularEsperaPedido()
+        );
 
-
-        this.servicePedido.nuevoPedido(productos, (Cliente)this.serviceUsuario.getUsuarioActual(), precioTotal);
-
-
-        System.out.println("Pedido"+this.servicePedido.getUltimoNroPedido()+", actualmente se encuentraen estado de espera.");
-        for(Empleado empleado : this.empleados) {
-            if(empleado instanceof Mozo) {
-                this.serviceNotificacion.enviarNotificacion(this.servicePedido.getUltimoPedido(), empleado);
+        System.out.println("Pedido"+this.servicePedido.getUltimoNroPedido()+", actualmente se encuentra en estado de espera.");
+        if (plataforma.equals(Plataforma.APP)) {
+            for(Empleado empleado : this.empleados) {
+                if(empleado instanceof Mozo) {
+                    this.serviceNotificacion.enviarNotificacion(this.servicePedido.getUltimoPedido(), empleado);
+                }
             }
         }
     }
 
-    public boolean pagoPedido(float monto, String tipoTarjeta) {
-        return this.serviceUsuario.pagoCliente(monto, tipoTarjeta);
+    public boolean pagoPedido(float monto, String estrategiaPago) {
+        return this.serviceUsuario.pagoCliente(monto, estrategiaPago);
     }
 
-    public void cambiarEstado(Empleado empleado, Pedido pedido) {
-        if (pedido.getEstado().equals(Estado.ENTREGADO)) {
+    public void cambiarEstado(Pedido pedido) {
+        if(pedido.getEstado().equals(Estado.EN_ESPERA)) {
+            pedido.setEstado(Estado.EN_PREPARACION);
+            pedido.setTiempoEspera(calcularPreparacionPedido(pedido));
+
+        } else if(pedido.getEstado().equals(Estado.EN_PREPARACION)) {
+            pedido.setEstado(Estado.LISTO_PARA_ENTREGAR);
+            pedido.setTiempoEntrega(calcularEntregaPedido(pedido));
+
+        } else if(pedido.getEstado().equals(Estado.LISTO_PARA_ENTREGAR)) {
+            pedido.setEstado(Estado.ENTREGADO);
+
+        } else if(pedido.getEstado().equals(Estado.ENTREGADO)) {
             System.out.println("Estado entregado");
-            return;
         }
-        empleado.continuarEtapa(empleado, pedido);
+
     }
 
     public String generarInforme(Empleado admin) {
@@ -87,6 +115,10 @@ public class Restaurante {
 
     public boolean notificacionPedido(Pedido pedido, Usuario usuario) {
         return this.serviceNotificacion.enviarNotificacion(pedido, usuario);
+    }
+
+    public short tiempoEsperaPedido(String idPedido) {
+        return this.servicePedido.tiempoEsperaPedido(idPedido);
     }
 
     public Componente getMenu() {
@@ -108,4 +140,22 @@ public class Restaurante {
     public ServicePedido getServicePedido() {
         return servicePedido;
     }
+
+
+    private String getTiempoActual() {
+        LocalDateTime fechaHora = LocalDateTime.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return fechaHora.format(formato);
+    }
+
+    private short calcularEsperaPedido() {
+        return (short) (this.servicePedido.calcularEsperaPedido() + 5);
+    }
+
+    private short calcularPreparacionPedido(Pedido pedido) {
+        Map productos = pedido.getTodosProductos();
+
+        return ;
+    }
+
 }

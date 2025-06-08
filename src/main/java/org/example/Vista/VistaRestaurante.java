@@ -64,6 +64,8 @@ public class VistaRestaurante {
             productosSolicitados.put("Helado", 2);
             productosSolicitados.put("Flan", 1);
 
+            String horario = "2025-06-08 19:15";
+
 
 
             switch (opcion) {
@@ -86,19 +88,33 @@ public class VistaRestaurante {
                 case 2 -> {
                     System.out.print("Ingrese cupon (o ninguno): ");
                     String cupon = scanner.nextLine();
-                    controlador.hacerPedido(cupon, productos);
+                    controlador.hacerPedido(cupon, productos, horario);
                 }
                 case 3 -> {
                     String metodo;
+                    String tipoTarjeta;
                     while(true) {
-                        System.out.println("Ingresa el tipo de tarjeta que utiliza: (Credito/Debito)");
+                        System.out.println("Ingresa la estrategia de pago que utiliza: (Tarjeta/Efectivo/GooglePay/MercadoPago)");
                         metodo = scanner.nextLine().toLowerCase();
 
-                        if (metodo.equalsIgnoreCase("credito")) {
-                            System.out.println("Se seleccionó pago con crédito.");
+                        if (metodo.equalsIgnoreCase("Tarjeta")) {
+                            System.out.println("Se seleccionó pago con tarjeta. Que tarjeta desea usar?: (Credito / Debito)");
+                            tipoTarjeta = scanner.nextLine().toLowerCase();
+                            if (tipoTarjeta.equalsIgnoreCase("debito")) {
+                                System.out.println("Se seleccionó pago con débito.");
+                                break;
+                            } else if (tipoTarjeta.equalsIgnoreCase("credito")) {
+                                System.out.println("Se seleccionó pago con crédito.");
+                                break;
+                            }
+                        } else if (metodo.equalsIgnoreCase("Efectivo")) {
+                            System.out.println("Se seleccionó pago con Efectivo, disfruta tu pedido con 10% de descuento!!");
                             break;
-                        } else if (metodo.equalsIgnoreCase("debito")) {
-                            System.out.println("Se seleccionó pago con débito.");
+                        } else if (metodo.equalsIgnoreCase("GooglePay")) {
+                            System.out.println("Se seleccionó pago con GooglePay.");
+                            break;
+                        } else if (metodo.equalsIgnoreCase("MercadoPago")) {
+                            System.out.println("Se seleccionó pago con MercadoPago.");
                             break;
                         } else {
                             System.out.println("Método de pago no reconocido.");

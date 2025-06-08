@@ -8,10 +8,12 @@ public class ServiceUsuario {
 
     private Optional<Usuario> usuarioActual;
     private final List<Usuario> usuarios;
+    private final List<Pedido> pedidos;
 
     public ServiceUsuario() {
         this.usuarioActual = Optional.empty();
         this.usuarios = new ArrayList<>();
+        this.pedidos = new ArrayList<>();
     }
 
     public Usuario getUsuarioActual() {
@@ -60,12 +62,11 @@ public class ServiceUsuario {
         return true;
     }
 
-    public boolean pagoCliente(float monto, String tipoTarjeta) {
-        return ((Cliente) usuarioActual.get()).pagar(monto, tipoTarjeta);
+    public boolean pagoCliente(float monto, EstrategiaPago estrategiaPago) {
+        return ((Cliente) usuarioActual.get()).pagar(monto, estrategiaPago);
     }
 
     public String generarInformeAdmin() {
         return ((Administrativo) this.usuarioActual.get()).generarInforme();
     }
-
 }

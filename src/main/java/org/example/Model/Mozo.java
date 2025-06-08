@@ -16,7 +16,7 @@ public class Mozo extends Empleado{
     @Override
     public void continuarEtapa(Empleado empleado, Pedido pedido) {
         System.out.println("El mozo: Este pedido esta listo para entregar. ");
-        pedido.cambiarEstado(Estado.LISTO_PARA_ENTREGAR);
+        pedido.setEstado(Estado.LISTO_PARA_ENTREGAR);
 
     }
 

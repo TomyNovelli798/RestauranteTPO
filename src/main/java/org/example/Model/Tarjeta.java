@@ -1,7 +1,5 @@
 package org.example.Model;
 
-abstract class Tarjeta {
+abstract class Tarjeta extends EstrategiaPago {
     private float monto;
-
-    abstract public boolean pagar(float monto);
 }

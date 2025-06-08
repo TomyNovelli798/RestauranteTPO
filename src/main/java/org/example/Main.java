@@ -21,26 +21,26 @@ public class Main {
         MenuEspecifico menuPostres = new MenuEspecifico("Postres");
 
         // Entradas
-        Producto empanada = new Producto("Empanada", "Empanada de carne picada", 500F, false);
-        Producto bruschetta = new Producto("Bruschetta", "Pan tostado con tomate y albahaca", 450F, false);
+        Producto empanada = new Producto("Empanada", "Empanada de carne picada", 500F, false, (short) 2);
+        Producto bruschetta = new Producto("Bruschetta", "Pan tostado con tomate y albahaca", 450F, false, (short) 3);
         menuEntradas.añadir(empanada);
         menuEntradas.añadir(bruschetta);
 
         // Bebidas
-        Producto cocaCola = new Producto("Coca-Cola", "Bebida gaseosa 350ml", 300F, false);
-        Producto limonada = new Producto("Limonada", "Limonada casera con menta", 350F, false);
+        Producto cocaCola = new Producto("Coca-Cola", "Bebida gaseosa 350ml", 300F, false, (short) 1);
+        Producto limonada = new Producto("Limonada", "Limonada casera con menta", 350F, false, (short) 2);
         menuBebidas.añadir(cocaCola);
         menuBebidas.añadir(limonada);
 
         // Platos
-        Producto milanesa = new Producto("Milanesa", "Milanesa con papas fritas", 1200F, true);
-        Producto pasta = new Producto("Pasta", "Fideos con salsa bolognesa", 1100F, false);
+        Producto milanesa = new Producto("Milanesa", "Milanesa con papas fritas", 1200F, true, (short) 15);
+        Producto pasta = new Producto("Pasta", "Fideos con salsa bolognesa", 1100F, false, (short) 20) ;
         menuPlatos.añadir(milanesa);
         menuPlatos.añadir(pasta);
 
         // Postres
-        Producto helado = new Producto("Helado", "Helado de vainilla con salsa de chocolate", 400F, true);
-        Producto flan = new Producto("Flan", "Flan casero con dulce de leche", 380F, true);
+        Producto helado = new Producto("Helado", "Helado de vainilla con salsa de chocolate", 400F, true, (short) 3);
+        Producto flan = new Producto("Flan", "Flan casero con dulce de leche", 380F, true, (short) 4);
         menuPostres.añadir(helado);
         menuPostres.añadir(flan);
 

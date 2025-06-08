@@ -4,5 +4,6 @@ public enum Estado {
     EN_ESPERA,
     EN_PREPARACION,
     LISTO_PARA_ENTREGAR,
-    ENTREGADO
+    ENTREGADO,
+    CANCELADO
 }

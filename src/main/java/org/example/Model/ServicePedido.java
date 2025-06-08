@@ -19,8 +19,8 @@ public class ServicePedido {
         this.pedidos = new ArrayList<>();
     }
 
-    public void nuevoPedido(Map<String, Integer> producto, Cliente cliente, float precioTotal) {
-        Pedido pedido = new Pedido(producto, cliente, precioTotal);
+    public void nuevoPedido(Map<String, Integer> producto, Cliente cliente, float precioTotal, String horario, short tiempoEspera) {
+        Pedido pedido = new Pedido(producto, cliente, precioTotal, horario, tiempoEspera);
         this.pedidos.add(pedido);
 
     }
@@ -44,4 +44,50 @@ public class ServicePedido {
         return -1F;
     }
 
+
+
+    public short tiempoEsperaPedido(String idPedido) {
+        for (Pedido p : this.pedidos) {
+            if(p.getIdPedido().equals(idPedido)) {
+                return p.getTiempoEspera();
+            }
+        }
+        return -1; // no existe el pedido
+    }
+
+    public short calcularEsperaPedido() {
+        short espera = 0;
+        for (Pedido p : this.pedidos) {
+            if ( p.getEstado().toString().equals("EN_ESPERA")) {
+                espera++;
+            }
+        }
+        return (short) ((espera/10)*20);
+    }
+
+    public short calcularPreparacion(Pedido pedidos) {
+        retrn pedido.calcularPreparacion();
+    }
+
+
+
+
+
+
+    public float cancelarPedido(String idPedido){
+        for(Pedido pedido : pedidos){
+            if(pedido.getIdPedido().equals(idPedido)) return pedido.cancelar();
+        }
+        throw new IllegalArgumentException("No se encontró ningún pedido con ese ID");
+    }
+
+    public void agregarProducto(String idPedido, Map<String, Integer> nuevosProductos, float precioAdicional) {
+        for(Pedido pedido : pedidos){
+            if(pedido.getIdPedido().equals(idPedido)) {
+                pedido.agregarProductos(nuevosProductos, precioAdicional);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("No se encontró un pedido con ese ID para agregarlo");
+    }
 }
