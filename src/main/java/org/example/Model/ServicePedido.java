@@ -66,7 +66,7 @@ public class ServicePedido {
     }
 
     public float cancelarPedido(String idPedido){
-        for(Pedido pedido : pedidos){
+        for(Pedido pedido : this.pedidos){
             if(pedido.getIdPedido().equals(idPedido)) return pedido.cancelar();
         }
         throw new IllegalArgumentException("No se encontró ningún pedido con ese ID");

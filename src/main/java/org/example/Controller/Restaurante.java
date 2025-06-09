@@ -53,7 +53,7 @@ public class Restaurante {
             String cupon,
             Map<String, Integer> productos,
             String horario,
-            Plataforma plataforma,
+            String plataforma,
             String modalidadEntrega
     ) {
         float precioTotal = this.calcularPedido(productos);
@@ -62,7 +62,7 @@ public class Restaurante {
             return;
         }
 
-        if (plataforma.equals(Plataforma.APP)) {
+        if (Plataforma.APP.toString().equals(plataforma)) {
             float descuento = this.servicePedido.isCupon(cupon);
             if(descuento > 0) {
                 precioTotal -= descuento;
@@ -82,13 +82,17 @@ public class Restaurante {
         );
 
         System.out.println("Pedido"+this.servicePedido.getUltimoNroPedido()+", actualmente se encuentra en estado de espera.");
-        if (plataforma.equals(Plataforma.APP)) {
+        if (Plataforma.APP.toString().equals(plataforma)) {
             for(Empleado empleado : this.empleados) {
                 if(empleado instanceof Mozo) {
                     this.serviceNotificacion.enviarNotificacion(this.servicePedido.getUltimoPedido(), empleado);
                 }
             }
         }
+    }
+
+    public void cancelarPedido(String idPedido) {
+        this.servicePedido.cancelarPedido(idPedido);
     }
 
     public boolean pagoPedido(float monto, String estrategiaPago) {

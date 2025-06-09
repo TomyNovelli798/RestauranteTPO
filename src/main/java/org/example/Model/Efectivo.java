@@ -7,5 +7,7 @@ public abstract class Efectivo extends EstrategiaPago {
         this.porcentajeDescuento = 0.1f;
     }
 
+    public boolean pagar(float monto) {return true;}
+
 
 }

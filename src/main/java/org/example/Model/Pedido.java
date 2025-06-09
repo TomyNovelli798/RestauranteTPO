@@ -60,7 +60,7 @@ public class Pedido {
     public String getHorario() {return horario;}
     public short getTiempoEspera() {return tiempoEspera;}
 
-    public boolean puedeCancelar(){
+    private boolean puedeCancelar(){
         return estado == Estado.EN_ESPERA || estado == Estado.EN_PREPARACION;
     }
 
@@ -92,7 +92,7 @@ public class Pedido {
     }
 
     private InterfazModalidadEntrega defModalidadEntrafa(String modalidad) {
-        if(modalidad.equalsIgnoreCase("Rappi")){
+        if(modalidad.equalsIgnoreCase("Delivery")){
             return new Delivery();
         }
         return new RetiroEnLocal();

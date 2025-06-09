@@ -88,7 +88,11 @@ public class VistaRestaurante {
                 case 2 -> {
                     System.out.print("Ingrese cupon (o ninguno): ");
                     String cupon = scanner.nextLine();
-                    controlador.hacerPedido(cupon, productos, horario);
+                    System.out.println("Ingrese la plataforma en la que realiza el pedido: (TOTEM/APP) ");
+                    String plataforma = scanner.nextLine();
+                    System.out.println("Ingrese la modalidad de la entrega: (Delivery/Local)");
+                    String modalidad = scanner.nextLine();
+                    controlador.hacerPedido(cupon, productos, horario, plataforma, modalidad);
                 }
                 case 3 -> {
                     String metodo;
