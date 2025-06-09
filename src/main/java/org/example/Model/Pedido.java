@@ -14,23 +14,20 @@ public class Pedido {
     private float precioTotal;
     private String horario;
     private short tiempoEspera;
+    private InterfazModalidadEntrega modalidadEntrega;
 
 
-    public Pedido(Map<String, Integer> productos, Cliente cliente, float precioTotal, String horario, short tiempoEspera) {
+    public Pedido(Map<String, Integer> productos, Cliente cliente, float precioTotal, String horario, short tiempoEspera, String modalidad) {
         ID_CONTADOR=+1;
         this.idPedido=ID_CONTADOR.toString();
         this.productos = productos;
         this.cliente = cliente;
         this.estado = Estado.EN_ESPERA;
         this.precioTotal = precioTotal;
+        this.modalidadEntrega = defModalidadEntrafa(modalidad);
     }
 
     public void setEstado(Estado estado) {this.estado = estado;}
-
-    public short calcularPreparacion() {
-        for()
-    }
-
 
 
 
@@ -88,6 +85,17 @@ public class Pedido {
             productos.merge(producto.getKey(), producto.getValue(), Integer::sum);
         }
         this.precioTotal += precioAdicional;//Se cobra de nuevo el producto agregado
+    }
+
+    public short tiempoEntrega() {
+        return modalidadEntrega.elegirModalidadEntrega();
+    }
+
+    private InterfazModalidadEntrega defModalidadEntrafa(String modalidad) {
+        if(modalidad.equalsIgnoreCase("Rappi")){
+            return new Delivery();
+        }
+        return new RetiroEnLocal();
     }
 }
 

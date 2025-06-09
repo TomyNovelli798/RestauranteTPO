@@ -62,7 +62,7 @@ public class ServiceUsuario {
         return true;
     }
 
-    public boolean pagoCliente(float monto, EstrategiaPago estrategiaPago) {
+    public boolean pagoCliente(float monto, String estrategiaPago) {
         return ((Cliente) usuarioActual.get()).pagar(monto, estrategiaPago);
     }
 

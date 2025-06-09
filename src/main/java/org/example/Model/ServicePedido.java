@@ -19,8 +19,8 @@ public class ServicePedido {
         this.pedidos = new ArrayList<>();
     }
 
-    public void nuevoPedido(Map<String, Integer> producto, Cliente cliente, float precioTotal, String horario, short tiempoEspera) {
-        Pedido pedido = new Pedido(producto, cliente, precioTotal, horario, tiempoEspera);
+    public void nuevoPedido(Map<String, Integer> producto, Cliente cliente, float precioTotal, String horario, short tiempoEspera, String modalidadEntrega) {
+        Pedido pedido = new Pedido(producto, cliente, precioTotal, horario, tiempoEspera, modalidadEntrega);
         this.pedidos.add(pedido);
 
     }
@@ -64,15 +64,6 @@ public class ServicePedido {
         }
         return (short) ((espera/10)*20);
     }
-
-    public short calcularPreparacion(Pedido pedidos) {
-        retrn pedido.calcularPreparacion();
-    }
-
-
-
-
-
 
     public float cancelarPedido(String idPedido){
         for(Pedido pedido : pedidos){

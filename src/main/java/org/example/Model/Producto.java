@@ -16,6 +16,7 @@ Producto extends Componente {
         this.descripcion = descripcion;
         this.precio = precio;
         this.ingredienteAlergenico = ingredienteAlergenico;
+        this.tiempoBaseEspera = tiempoBaseEspera;
     }
 
 
@@ -40,10 +41,11 @@ Producto extends Componente {
         return 0;
     }
 
-
     public float getPrecio() {
         return precio;
     }
+
+    public short getTiempoBaseEspera() {return this.tiempoBaseEspera;}
 
 
 

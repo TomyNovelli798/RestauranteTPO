@@ -2,9 +2,11 @@ package org.example.Controller;
 
 import org.example.Model.*;
 
+import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.List;
 
 public class Restaurante {
     private Componente menu;
@@ -51,7 +53,8 @@ public class Restaurante {
             String cupon,
             Map<String, Integer> productos,
             String horario,
-            Plataforma plataforma
+            Plataforma plataforma,
+            String modalidadEntrega
     ) {
         float precioTotal = this.calcularPedido(productos);
         if(Optional.of(this.serviceUsuario.getUsuarioActual()).isEmpty()) {
@@ -74,7 +77,8 @@ public class Restaurante {
                 productos,
                 (Cliente)this.serviceUsuario.getUsuarioActual(),
                 precioTotal, horario,
-                calcularEsperaPedido()
+                calcularEsperaPedido(),
+                modalidadEntrega
         );
 
         System.out.println("Pedido"+this.servicePedido.getUltimoNroPedido()+", actualmente se encuentra en estado de espera.");
@@ -98,7 +102,7 @@ public class Restaurante {
 
         } else if(pedido.getEstado().equals(Estado.EN_PREPARACION)) {
             pedido.setEstado(Estado.LISTO_PARA_ENTREGAR);
-            pedido.setTiempoEntrega(calcularEntregaPedido(pedido));
+            pedido.setTiempoEspera(pedido.tiempoEntrega());
 
         } else if(pedido.getEstado().equals(Estado.LISTO_PARA_ENTREGAR)) {
             pedido.setEstado(Estado.ENTREGADO);
@@ -153,9 +157,29 @@ public class Restaurante {
     }
 
     private short calcularPreparacionPedido(Pedido pedido) {
+        short preparacion = 0;
         Map productos = pedido.getTodosProductos();
+        Set pSet = productos.keySet();
+        while( !pSet.isEmpty() ) {
+            String p = (String)pSet.iterator().next();
+            preparacion = (short) (tomarTiempoBase(this.menu, p) * (Integer) productos.get(p));
+            pSet.remove(p);
+        }
+        return preparacion;
+    }
 
-        return ;
+    private short tomarTiempoBase(Componente menu, String producto) {
+        List<Componente> menusEspecificos = menu.getHijos();
+        for (Componente m : menusEspecificos) {
+            List<Componente> productos = m.getHijos();
+            for (Componente p : productos) {
+                Producto pp = (Producto) p;
+                if (pp.getNombre().equals(producto)) {
+                    return pp.getTiempoBaseEspera();
+                }
+            }
+        }
+        return 0;
     }
 
 }

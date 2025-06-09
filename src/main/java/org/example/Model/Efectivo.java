@@ -6,4 +6,6 @@ public abstract class Efectivo extends EstrategiaPago {
     public Efectivo() {
         this.porcentajeDescuento = 0.1f;
     }
+
+
 }

@@ -144,7 +144,7 @@ public class VistaRestaurante {
             switch (opcion) {
                 case 1 -> {
                     Pedido pedido = controlador.getServicePedido().getUltimoPedido();
-                    controlador.cambiarEstado(empleado, pedido);
+                    controlador.cambiarEstado(pedido);
                 }
                 case 2 -> {
                     Pedido pedido = controlador.getServicePedido().getUltimoPedido();
